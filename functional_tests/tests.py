@@ -16,9 +16,22 @@ class NewVisitorTest(LiveServerTestCase):
 
         # He notices the page title and header mention an English/Latvian
         # translator.
-        self.fail('Finish the test!')
+        self.assertIn('EN ⇆ LV', self.browser.title)
+        header_text = self.browser.find_element_by_tag_name('h1').text
+        self.assertIn('DictLV', header_text)
 
-        # He's invited to enter a word to translate, either English or Latvian
+        # He's invited to enter a word to translate. 
+        inputbox = self.browser.find_element_by_id('id_translate_word')
+        self.assertEqual(
+            inputbox.get_attribute('placeholder'),
+            'Enter a word to translate'
+        )
 
-        # He hits enter, and a translation appears!
+        # He decides to put a word in English, "hello".
+
+        # When he hits enter a translation appears!
+
+        # He checks if a Latvian word will work, he puts it in and hits enter.
+
+        # Again a translation appears!
 
