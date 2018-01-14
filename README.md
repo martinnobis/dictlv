@@ -5,6 +5,12 @@ An English ⇆ Latvian word translation website.
 
 * [Django](https://www.djangoproject.com/) - The web framework used
 * [Selenium](http://www.seleniumhq.org/) - Web browser testing
+* [Sphinx](http://www.sphinx-doc.org/en/stable/) - Documentation generator
+
+## Build Instructions
+
+* Documentation - Run `make html` in the `/docs`
+ folder.
 
 ## License
 
