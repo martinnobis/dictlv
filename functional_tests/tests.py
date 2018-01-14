@@ -21,7 +21,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('DictLV', header_text)
 
         # He's invited to enter a word to translate. 
-        inputbox = self.browser.find_element_by_id('id_translate_word')
+        inputbox = self.browser.find_element_by_id('id_text')
         self.assertEqual(
             inputbox.get_attribute('placeholder'),
             'Enter a word to translate'
