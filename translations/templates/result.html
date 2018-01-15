@@ -5,7 +5,8 @@
 {% block table %}
 
 <table id="id_results_table" class="table">
-    <tr>{{ text }}</tr>
+    <!-- It's important to put this in a td! -->
+    <tr><td>{{ text }}</td></tr>
 </table>
 
 {% endblock %}

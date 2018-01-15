@@ -20,3 +20,4 @@ def search(request):
         form = SearchForm(request.POST)
         text = form.data['text']
         return redirect(reverse('view_result', kwargs={'text': text}))
+    # TODO: Add else to render view_result and test for it.
