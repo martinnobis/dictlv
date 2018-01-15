@@ -8,4 +8,4 @@ def home_page(request):
     return render(request, 'home.html', {'form': TranslationForm()})
 
 def result(request, text):
-    return render(request, 'result.html')
+    return render(request, 'result.html', {'text': text})
