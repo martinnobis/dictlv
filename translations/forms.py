@@ -1,6 +1,6 @@
 from django import forms
 
-class TranslationForm(forms.Form):
+class SearchForm(forms.Form):
 
     text = forms.CharField(widget=forms.TextInput(attrs={
         'placeholder': 'Enter a word to translate'

@@ -1,5 +1,9 @@
+import unittest
+from unittest.mock import patch
+from django.http import HttpRequest
 from django.test import TestCase
-from translations.forms import TranslationForm
+from translations.forms import SearchForm
+from translations.views import search
 
 class HomePageTest(TestCase):
 
@@ -9,7 +13,18 @@ class HomePageTest(TestCase):
 
     def test_home_page_uses_translation_form(self):
         response = self.client.get('/')
-        self.assertIsInstance(response.context['form'], TranslationForm)
+        self.assertIsInstance(response.context['form'], SearchForm)
+
+@patch('translations.views.SearchForm')
+class SearchViewTest(unittest.TestCase):
+
+    def setUp(self):
+        self.request = HttpRequest()
+        self.request.POST['text'] = 'hello'
+
+    def test_passes_POST_data_to_SearchForm(self, mockSearchForm):
+        search(self.request)
+        mockSearchForm.assert_called_once_with(self.request.POST)
 
 class ResultViewTest(TestCase):
 
