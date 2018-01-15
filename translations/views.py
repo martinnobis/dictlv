@@ -1,6 +1,7 @@
 """Views for the Translations app
 blah blah...
 """
+from django.urls import reverse
 from django.shortcuts import render, redirect
 from translations.forms import SearchForm
 
@@ -10,17 +11,12 @@ def home_page(request):
 def result(request, text):
     """Displays the result
     """
-    return render(request, 'result.html', {'text': text})
+    return render(request, 'result.html', {'text': text, 'form': SearchForm()})
 
 def search(request):
     """Handles the form for searching the database.
     """
-    form = SearchForm(request.POST)
-    text = form.data['text']
-    print(text)
-    if form.is_valid():
-        print("is valid")
-        return redirect('result.html', {'text': text})
-    else:
-        print("is not valid")
-        return render(request, 'home.html', {'form': form})
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        text = form.data['text']
+        return redirect(reverse('view_result', kwargs={'text': text}))
