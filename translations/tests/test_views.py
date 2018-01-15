@@ -16,7 +16,7 @@ class HomePageTest(TestCase):
         self.assertIsInstance(response.context['form'], SearchForm)
 
 @patch('translations.views.SearchForm')
-class SearchViewTest(unittest.TestCase):
+class SearchViewMockTest(unittest.TestCase):
 
     def setUp(self):
         self.request = HttpRequest()
@@ -26,6 +26,12 @@ class SearchViewTest(unittest.TestCase):
     def test_passes_POST_data_to_SearchForm(self, mockSearchForm):
         search(self.request)
         mockSearchForm.assert_called_once_with(self.request.POST)
+
+class SearchViewTest(TestCase):
+
+    def test_searching_for_search_still_works(self):
+        response = self.client.get('/tr/search')
+        self.assertTemplateUsed(response, 'result.html')
 
 class ResultViewTest(TestCase):
 

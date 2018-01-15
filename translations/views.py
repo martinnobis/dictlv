@@ -19,5 +19,4 @@ def search(request):
     if request.method == "POST":
         form = SearchForm(request.POST)
         text = form.data['text']
-        return redirect(reverse('view_result', kwargs={'text': text}))
-    # TODO: Add else to render view_result and test for it.
+        return redirect(reverse('view_result', kwargs={'text': text.title()}))
