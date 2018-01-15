@@ -30,13 +30,13 @@ class SearchViewTest(unittest.TestCase):
 class ResultViewTest(TestCase):
 
     def test_uses_result_template(self):
-        response = self.client.get('/translations/hello/')
+        response = self.client.get('/tr/hello/')
         self.assertTemplateUsed(response, 'result.html')
 
     def test_displays_searched_text(self):
-        response = self.client.get('/translations/hello/')
+        response = self.client.get('/tr/hello/')
         self.assertContains(response, 'hello')
 
     def test_displays_searched_text_with_special_characters(self):
-        response = self.client.get('/translations/labrīt/')
+        response = self.client.get('/tr/labrīt/')
         self.assertContains(response, 'labrīt')
