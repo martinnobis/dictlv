@@ -11,10 +11,17 @@
     <body>
         <h1>DictLV</h1>
 
+        <!--- The input form -->
         <form method="POST" action="{% block form_action %}{% endblock %}">
             {{ form.text }}
             {% csrf_token %}
         </form>
+
+        <!--- The results block -->
+        <div>
+            {% block table %} {% endblock %}
+        </div>
+
     </body>
 
 </html>

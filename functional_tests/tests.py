@@ -1,7 +1,10 @@
 from selenium import webdriver
 from django.test import LiveServerTestCase
+from selenium.webdriver.common.keys import Keys
 
-class NewVisitorTest(LiveServerTestCase):
+from .base import FunctionalTest
+
+class NewVisitorTest(FunctionalTest):
 
     def setUp(self):
         self.browser = webdriver.Firefox()
@@ -21,17 +24,21 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertIn('DictLV', header_text)
 
         # He's invited to enter a word to translate. 
-        inputbox = self.browser.find_element_by_id('id_text')
+        inputbox = self.get_item_input_box()
         self.assertEqual(
             inputbox.get_attribute('placeholder'),
             'Enter a word to translate'
         )
 
         # He decides to put a word in English, "hello".
+        inputbox.send_keys('hello')
 
         # When he hits enter a translation appears!
+        inputbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_results_table('Hello')
 
         # He checks if a Latvian word will work, he puts it in and hits enter.
+        self.fail('Finish the test!')
 
         # Again a translation appears!
 
