@@ -29,8 +29,13 @@ class SearchViewMockTest(unittest.TestCase):
 
 class SearchViewTest(TestCase):
 
-    def test_searching_for_search_still_works(self):
-        response = self.client.get('/tr/search')
+    def test_redirects_after_POST(self):
+        response = self.client.post('/tr/k/srch', data={'text': 'hi'})
+        self.assertRedirects(response, '/tr/Hi/')
+
+    def test_POST_uses_result_template(self):
+        response = self.client.post('/tr/k/srch', data={'text': 'hi'},
+            follow=True)
         self.assertTemplateUsed(response, 'result.html')
 
 class ResultViewTest(TestCase):
@@ -39,6 +44,8 @@ class ResultViewTest(TestCase):
         response = self.client.get('/tr/hello/')
         self.assertTemplateUsed(response, 'result.html')
 
+    # TODO: These should check for the EXACT string in the EXACT spot
+
     def test_displays_searched_text(self):
         response = self.client.get('/tr/hello/')
         self.assertContains(response, 'hello')
@@ -46,3 +53,7 @@ class ResultViewTest(TestCase):
     def test_displays_searched_text_with_special_characters(self):
         response = self.client.get('/tr/labrīt/')
         self.assertContains(response, 'labrīt')
+
+    def test_searching_for_search_still_works(self):
+        response = self.client.get('/tr/search/')
+        self.assertContains(response, 'search')

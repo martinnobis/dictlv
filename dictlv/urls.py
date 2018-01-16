@@ -22,5 +22,5 @@ from translations import views as translations_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^$', translations_views.home_page, name='home'),
-    url(r'^tr/', include(translations_urls))
+    url(r'^tr/', include(translations_urls)),
 ]
