@@ -12,9 +12,8 @@
         <h1>DictLV</h1>
 
         <!--- The input form -->
-        <form method="POST" action="{% block form_action %}{% endblock %}">
+        <form method="GET" action="{% block form_action %}{% endblock %}">
             {{ form.text }}
-            {% csrf_token %}
         </form>
 
         <!--- The results block -->
