@@ -41,7 +41,3 @@ class SearchViewTest(TestCase):
     def test_displays_searched_text_with_special_characters(self):
         response = self.client.get(reverse('view_search'), data={'text': 'labrīt'})
         self.assertContains(response, 'labrīt')
-
-    def test_searching_for_search_still_works(self):
-        response = self.client.get(reverse('view_search'), data={'text': 'search'})
-        self.assertContains(response, 'search')

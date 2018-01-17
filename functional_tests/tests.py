@@ -35,10 +35,10 @@ class NewVisitorTest(FunctionalTest):
 
         # When he hits enter he sees that his search term is returned
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_results_table('Hello')
+        self.wait_for_row_in_results_table('hello')
 
         # And a translation appears underneath it!
-        self.wait_for_row_in_results_table('Sveiki')
+        self.wait_for_row_in_results_table('sveiki')
 
         # He checks if a Latvian word will work, he puts it in and hits enter.
         self.fail('Finish the test!')
