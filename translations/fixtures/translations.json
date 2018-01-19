@@ -1,0 +1,104 @@
+[
+{
+  "model": "translations.enlv",
+  "pk": 1,
+  "fields": {
+    "en": 2,
+    "lv": 1
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 2,
+  "fields": {
+    "en": 1,
+    "lv": 1
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 3,
+  "fields": {
+    "en": 3,
+    "lv": 2
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 4,
+  "fields": {
+    "en": 5,
+    "lv": 6
+  }
+},
+{
+  "model": "translations.english",
+  "pk": 1,
+  "fields": {
+    "txt": "hello"
+  }
+},
+{
+  "model": "translations.english",
+  "pk": 2,
+  "fields": {
+    "txt": "hi"
+  }
+},
+{
+  "model": "translations.english",
+  "pk": 3,
+  "fields": {
+    "txt": "town"
+  }
+},
+{
+  "model": "translations.english",
+  "pk": 4,
+  "fields": {
+    "txt": "browser"
+  }
+},
+{
+  "model": "translations.english",
+  "pk": 5,
+  "fields": {
+    "txt": "What is the time?"
+  }
+},
+{
+  "model": "translations.latvian",
+  "pk": 1,
+  "fields": {
+    "txt": "sveiki"
+  }
+},
+{
+  "model": "translations.latvian",
+  "pk": 2,
+  "fields": {
+    "txt": "pilsta"
+  }
+},
+{
+  "model": "translations.latvian",
+  "pk": 3,
+  "fields": {
+    "txt": "suns"
+  }
+},
+{
+  "model": "translations.latvian",
+  "pk": 4,
+  "fields": {
+    "txt": "ar labu nakti"
+  }
+},
+{
+  "model": "translations.latvian",
+  "pk": 6,
+  "fields": {
+    "txt": "Cik ir pulkstenis?"
+  }
+}
+]

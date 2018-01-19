@@ -7,21 +7,21 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-class EnLv(models.Model):
-    en = models.ForeignKey('English', models.CASCADE, blank=True, null=True)
-    lv = models.ForeignKey('Latvian', models.CASCADE, blank=True, null=True)
+class Enlv(models.Model):
     id = models.BigAutoField(primary_key=True)
+    en = models.ForeignKey('English', models.CASCADE, blank=False, null=False, default=1)
+    lv = models.ForeignKey('Latvian', models.CASCADE, blank=False, null=False, default=1)
 
     class Meta:
         managed = False
-        db_table = 'en_lv'
+        db_table = 'enlv'
 
     def __str__(self):
         return "%s = %s" % (self.en.txt, self.lv.txt)
 
 class English(models.Model):
     id = models.BigAutoField(primary_key=True)
-    txt = models.TextField(unique=True, blank=True, null=True)
+    txt = models.TextField(unique=True, blank=False, null=False)
 
     class Meta:
         managed = False
@@ -33,7 +33,7 @@ class English(models.Model):
 
 class Latvian(models.Model):
     id = models.BigAutoField(primary_key=True)
-    txt = models.TextField(unique=True, blank=True, null=True)
+    txt = models.TextField(unique=True, blank=False, null=False)
 
     class Meta:
         managed = False

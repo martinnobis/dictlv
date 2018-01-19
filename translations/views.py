@@ -14,4 +14,4 @@ def search(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             text = form.data['text']
-            return render(request, 'result.html', {'text': text.title(), 'form': form})
+            return render(request, 'result.html', {'text': text, 'form': form})
