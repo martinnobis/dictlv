@@ -19,16 +19,13 @@ class DBFixtureTest(TestCase):
 
     def test_finds_english_object(self):
         self.assertIsNotNone(get_object_from_text(English, 'hello'))
-        # Just in case, test for non existant object
-        self.assertIsNone(get_object_from_text(English, 'hello!'))
 
     def test_finds_latvian_object(self):
         self.assertIsNotNone(get_object_from_text(Latvian, 'sveiki'))
-        # Just in case, test for non existant object
-        self.assertIsNone(get_object_from_text(Latvian, 'sveaikiu'))
 
     def test_finds_one_to_one_translation(self):
-        self.assertIn("sveiki", get_translation(English, Latvian, 'hello'))
+        translation = get_translation(English, Latvian, 'town')
+        self.assertIn("pilsēta", translation)
 
     def test_finds_one_to_many_translations(self):
         translations = get_translation(Latvian, English, 'sveiki')
@@ -36,7 +33,14 @@ class DBFixtureTest(TestCase):
         self.assertIn("hi", translations)
 
     def test_cannot_find_search_term(self):
-        pass
+        self.assertIsNone(get_object_from_text(Latvian, 'sveaikiu'))
+        self.assertIsNone(get_object_from_text(English, 'helloooo'))
 
     def test_finds_no_translations(self):
-        pass
+        self.assertFalse(get_translation(Latvian, English, 'suns'))
+        self.assertFalse(get_translation(Latvian, English, 'ar labu nakti'))
+        self.assertFalse(get_translation(English, Latvian, 'browser'))
+
+    def test_translation_handles_punctuation(self):
+        translation = get_translation(Latvian, English, "Cik ir pulkstenis?")
+        self.assertIn("What is the time?", translation)

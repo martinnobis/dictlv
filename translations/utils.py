@@ -23,14 +23,17 @@ def get_object_from_text(model, text):
 def get_objects_from_ids(model, ids):
     return model.objects.filter(pk__in=ids)
 
+# TODO: How to refactor this to remove the if statement? There is probably a 
+# way to refactor all of these methods into a concise efficient query.
 @retrieve
 def get_intersect_ids_from_id(model, id):
-    """Searches for the id in the models intersect table and returns a list of 
-    ids from the other column which correspond to its translations.
-    """ 
+    """Searches for the id in the models intersect table and returns a list of
+    ids from the other column which correspond to its translations. Can only
+    work with English and Latvian models.
+    """
     if model is English:
-        return [intersect.lv_id for intersect in Enlv.objects.filter(en_id=id)]
-    return [intersect.en_id for intersect in Enlv.objects.filter(lv_id=id)]
+        return Latvian.objects.filter(enlv__en_id=id)
+    return English.objects.filter(enlv__lv_id=id)
 
 def get_translation(from_lang, to_lang, text):
     """Returns a list of translation strings.
