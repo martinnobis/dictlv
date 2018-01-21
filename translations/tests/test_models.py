@@ -1,9 +1,7 @@
 from django.apps import apps
 from django.test import TestCase
 from translations.models import English, Latvian, Enlv
-from translations.utils import (latvian_trans_from_english,
-                                english_trans_from_latvian,
-                                get_object_from_text)
+from translations.utils import (get_translation, get_object_from_text)
 
 class DBFixtureTest(TestCase):
     fixtures = ['translations.json']
@@ -30,10 +28,10 @@ class DBFixtureTest(TestCase):
         self.assertIsNone(get_object_from_text(Latvian, 'sveaikiu'))
 
     def test_finds_one_to_one_translation(self):
-        self.assertIn("sveiki", latvian_trans_from_english(text='hello'))
+        self.assertIn("sveiki", get_translation(English, Latvian, 'hello'))
 
     def test_finds_one_to_many_translations(self):
-        translations = english_trans_from_latvian(text='sveiki')
+        translations = get_translation(Latvian, English, 'sveiki')
         self.assertIn("hello", translations)
         self.assertIn("hi", translations)
 

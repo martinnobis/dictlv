@@ -8,7 +8,7 @@
 from django.db import models
 
 class Enlv(models.Model):
-    """Contains the ids for the translations between English and Latvian
+    """Contains the ids for the translations between English and Latvian.
     Each row contains a foreignkey to a Latvian and English model id from their
     respective tables. Many-to-many and one-to-many translations are supported.
     """
