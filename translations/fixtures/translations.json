@@ -1,37 +1,5 @@
 [
 {
-  "model": "translations.enlv",
-  "pk": 1,
-  "fields": {
-    "en": 2,
-    "lv": 1
-  }
-},
-{
-  "model": "translations.enlv",
-  "pk": 2,
-  "fields": {
-    "en": 1,
-    "lv": 1
-  }
-},
-{
-  "model": "translations.enlv",
-  "pk": 3,
-  "fields": {
-    "en": 3,
-    "lv": 2
-  }
-},
-{
-  "model": "translations.enlv",
-  "pk": 4,
-  "fields": {
-    "en": 5,
-    "lv": 6
-  }
-},
-{
   "model": "translations.english",
   "pk": 1,
   "fields": {
@@ -99,6 +67,38 @@
   "pk": 6,
   "fields": {
     "txt": "Cik ir pulkstenis?"
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 1,
+  "fields": {
+    "en": 2,
+    "lv": 1
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 2,
+  "fields": {
+    "en": 1,
+    "lv": 1
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 3,
+  "fields": {
+    "en": 3,
+    "lv": 2
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 4,
+  "fields": {
+    "en": 5,
+    "lv": 6
   }
 }
 ]

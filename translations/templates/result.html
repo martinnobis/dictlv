@@ -6,8 +6,10 @@
 
 <table id="id_results_table" class="table">
     <!-- It's important to put this in a td! -->
+    <tr><td>{{ search_term }}</td></tr>
+    {% for text in translations %}
     <tr><td>{{ text }}</td></tr>
-    <tr><td>{{ trans }}</td></tr>
+    {% endfor %}
 </table>
 
 {% endblock %}

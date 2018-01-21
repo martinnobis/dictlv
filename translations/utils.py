@@ -38,7 +38,10 @@ def get_intersect_ids_from_id(model, id):
 def get_translation(from_lang, to_lang, text):
     """Returns a list of translation strings.
     """
-    from_id = get_object_from_text(from_lang, text).id
-    to_ids = get_intersect_ids_from_id(from_lang, from_id)
-    to_objs = get_objects_from_ids(to_lang, to_ids)
-    return [to_obj.txt for to_obj in to_objs]
+    from_object = get_object_from_text(from_lang, text)
+    if from_object:
+        from_id = from_object.id
+        to_ids = get_intersect_ids_from_id(from_lang, from_id)
+        to_objs = get_objects_from_ids(to_lang, to_ids)
+        return [to_obj.txt for to_obj in to_objs]
+    return []

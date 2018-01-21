@@ -1,15 +1,24 @@
 from selenium import webdriver
+from django.apps import apps
 from django.test import LiveServerTestCase
 from selenium.webdriver.common.keys import Keys
 
 from .base import FunctionalTest
 
 class NewVisitorTest(FunctionalTest):
+    fixtures = ['translations.json']
+
+    def set_model_management(self, setting):
+        unmanaged_models = [m for m in apps.get_models() if not m._meta.managed]
+        for m in unmanaged_models:
+            m._meta.managed = setting 
 
     def setUp(self):
+        self.set_model_management(True)
         self.browser = webdriver.Firefox()
 
     def tearDown(self):
+        self.set_model_management(False)
         self.browser.quit()
 
     def test_can_translate_a_word(self):
