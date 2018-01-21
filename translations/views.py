@@ -15,8 +15,7 @@ def search(request):
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
-            user_in = form.data['text']
-            # TODO: convert user_in to lowercase
+            user_in = form.data['text'].lower()
             lv_translations = get_translation(English, Latvian, user_in)
             en_translations = get_translation(Latvian, English, user_in)
             trans = []

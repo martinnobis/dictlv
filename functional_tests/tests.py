@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 
 from .base import FunctionalTest
 
-class NewVisitorTest(FunctionalTest):
+class SimpleTranslationTest(FunctionalTest):
     fixtures = ['translations.json']
 
     def set_model_management(self, setting):
@@ -50,7 +50,11 @@ class NewVisitorTest(FunctionalTest):
         self.wait_for_row_in_results_table('sveiki')
 
         # He checks if a Latvian word will work, he puts it in and hits enter.
-        self.fail('Finish the test!')
+        inputbox = self.get_item_input_box()
+        inputbox.clear()
+        inputbox.send_keys('sveiki')
+        inputbox.send_keys(Keys.ENTER)
 
         # Again a translation appears!
+        self.wait_for_row_in_results_table('hello')
 
