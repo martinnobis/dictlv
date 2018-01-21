@@ -33,7 +33,9 @@ class DBFixtureTest(TestCase):
         self.assertIn("sveiki", latvian_trans_from_english(text='hello'))
 
     def test_finds_one_to_many_translations(self):
-        self.assertIn("hello", english_trans_from_latvian(text='sveiki'))
+        translations = english_trans_from_latvian(text='sveiki')
+        self.assertIn("hello", translations)
+        self.assertIn("hi", translations)
 
     def test_cannot_find_search_term(self):
         pass

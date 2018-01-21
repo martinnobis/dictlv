@@ -8,6 +8,10 @@
 from django.db import models
 
 class Enlv(models.Model):
+    """Contains the ids for the translations between English and Latvian
+    Each row contains a foreignkey to a Latvian and English model id from their
+    respective tables. Many-to-many and one-to-many translations are supported.
+    """
     id = models.BigAutoField(primary_key=True)
     en = models.ForeignKey('English', models.CASCADE, blank=False, null=False, default=1)
     lv = models.ForeignKey('Latvian', models.CASCADE, blank=False, null=False, default=1)
@@ -20,6 +24,8 @@ class Enlv(models.Model):
         return "%s = %s" % (self.en.txt, self.lv.txt)
 
 class English(models.Model):
+    """Contains a list of English words
+    """
     id = models.BigAutoField(primary_key=True)
     txt = models.TextField(unique=True, blank=False, null=False)
 
@@ -32,6 +38,8 @@ class English(models.Model):
 
 
 class Latvian(models.Model):
+    """Contains a list of Latvian words
+    """
     id = models.BigAutoField(primary_key=True)
     txt = models.TextField(unique=True, blank=False, null=False)
 
