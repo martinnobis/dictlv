@@ -7,4 +7,3 @@ class SearchFormTest(TestCase):
         form = SearchForm()
         # What is form.as_p()??
         self.assertIn('placeholder="Enter a word to translate"', form.as_p())
-

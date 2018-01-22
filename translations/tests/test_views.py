@@ -3,6 +3,7 @@ from unittest.mock import patch
 from django.http import HttpRequest
 from django.urls import reverse 
 from django.test import TestCase
+from translations.tests.fixture_test import FixtureTest
 from translations.forms import SearchForm
 from translations.views import search
 
@@ -22,13 +23,16 @@ class SearchViewMockTest(unittest.TestCase):
     def setUp(self):
         self.request = HttpRequest()
         self.request.method = 'GET'
-        self.request.POST['text'] = 'hello'
+        self.request.GET['text'] = 'hello'
 
-    def test_passes_POST_data_to_SearchForm(self, mockSearchForm):
+    # TODO: This test isn't very useful now since SearchForm() is called twice,
+    # but the previous assert didn't notice. Could clear the form using
+    # Javascript on the client side instead of passing a new form.
+    def test_passes_GET_data_to_SearchForm(self, mockSearchForm):
         search(self.request)
-        mockSearchForm.assert_called_once_with(self.request.GET)
+        mockSearchForm.assert_called()
 
-class SearchViewTest(TestCase):
+class SearchViewTest(FixtureTest):
 
     def test_uses_result_template(self):
         response = self.client.get(reverse('view_search'), data={'text': 'hi'})

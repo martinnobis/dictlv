@@ -58,3 +58,4 @@ class SimpleTranslationTest(FunctionalTest):
         # Again a translation appears!
         self.wait_for_row_in_results_table('hello')
 
+        # Satisfied, he goes back to sleep

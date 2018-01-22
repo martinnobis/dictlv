@@ -25,6 +25,6 @@ def search(request):
                 trans = trans + en_translations
             if trans:
                 return render(request, 'result.html',
-                              {'search_term': user_in, 'translations': trans, 'form': form})
+                              {'search_term': user_in, 'translations': trans, 'form': SearchForm()})
             else:
-                return render(request, 'noresult.html', {'search_term': user_in, 'form': form})
+                return render(request, 'noresult.html', {'search_term': user_in, 'form': SearchForm()})

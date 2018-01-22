@@ -1,9 +1,10 @@
 from django.apps import apps
 from django.test import TestCase
-from translations.models import English, Latvian, Enlv
+from translations.models import English, Latvian
+from translations.tests.fixture_test import FixtureTest
 from translations.utils import (get_translation, get_object_from_text)
 
-class DBFixtureTest(TestCase):
+class RetrieveTest(FixtureTest):
     fixtures = ['translations.json']
 
     def set_model_management(self, setting):
