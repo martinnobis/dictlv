@@ -21,7 +21,7 @@ class SimpleTranslationTest(FunctionalTest):
         self.set_model_management(False)
         self.browser.quit()
 
-    def test_can_translate_a_word(self):
+    def test_can_translate_a_word_in_english_and_latvian(self):
         # Karlis has heard of this cool new translator. He checks it out on his
         # browser.
         self.browser.get(self.live_server_url)
@@ -59,3 +59,19 @@ class SimpleTranslationTest(FunctionalTest):
         self.wait_for_row_in_results_table('hello')
 
         # Satisfied, he goes back to sleep
+
+    def test_search_terms_dont_need_latvia_special_characters(self):
+        # Karlis hates typing in the Latvian special characters on his English
+        # keyboard. He wants to find out if the translator is smart enough to
+        # recognise a Latvian word which isn't spelt with these characters.
+
+        # He opens up his browser and navigates to the translator
+        self.browser.get(self.live_server_url)
+
+        # He omits the special character in his search term
+        inputbox = self.get_item_input_box()
+        inputbox.send_keys('pilseta') # pilsēta
+
+        # When he hits enter he sees that his translation worked!
+        inputbox.send_keys(Keys.ENTER)
+        self.wait_for_row_in_results_table('town')
