@@ -1,8 +1,10 @@
+import string
 from django.apps import apps
 from django.test import TestCase
 from translations.models import English, Latvian
 from translations.tests.fixture_test import FixtureTest
-from translations.utils import (get_translation, get_object_from_text)
+from translations.utils import (get_translation, get_object_from_text, 
+                                special_chars)
 
 class RetrieveTest(FixtureTest):
     fixtures = ['translations.json']
@@ -45,3 +47,11 @@ class RetrieveTest(FixtureTest):
     def test_translation_handles_punctuation(self):
         translation = get_translation(Latvian, English, "Cik ir pulkstenis?")
         self.assertIn("What is the time?", translation)
+
+class SpecialCharacterTest(TestCase):
+
+    def test_all_special_characters_removed_from_text(self):
+        text = "ēeāaīiūučcģgķkļlņnšsžz"
+        expected = "eeaaiiuuccggkkllnnsszz"
+        modified_text = text.translate(text.maketrans(special_chars))
+        self.assertEqual(expected, modified_text)

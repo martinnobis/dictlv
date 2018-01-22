@@ -3,10 +3,13 @@
 from translations.models import English, Latvian, Enlv
 from django.core.exceptions import ObjectDoesNotExist
 
+special_chars = {'ē':'e','ā':'a','ī':'i','ū':'u','č':'c','ģ':'g','ķ':'k',
+                 'ļ':'l','ņ':'n','š':'s','ž':'z'}
+
 def retrieve(fn):
     """Querying the database for non-existant object throws an exception. This
-    function serves can be used as a decorator to instead return None for
-    when the database is queried for objects which don't exist.
+    function can be used as a decorator to instead return None for when the
+    database is queried for objects which don't exist.
     """
     def modified_fn(*args, **kwargs):
         try:
