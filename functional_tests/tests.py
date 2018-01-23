@@ -60,7 +60,7 @@ class SimpleTranslationTest(FunctionalTest):
 
         # Satisfied, he goes back to sleep
 
-    def test_search_terms_dont_need_latvia_special_characters(self):
+    def test_search_terms_dont_need_latvian_special_characters(self):
         # Karlis hates typing in the Latvian special characters on his English
         # keyboard. He wants to find out if the translator is smart enough to
         # recognise a Latvian word which isn't spelt with these characters.
@@ -72,6 +72,11 @@ class SimpleTranslationTest(FunctionalTest):
         inputbox = self.get_item_input_box()
         inputbox.send_keys('pilseta') # pilsēta
 
-        # When he hits enter he sees that his translation worked!
+        # When he hits enter he gets a 'Did you mean?' prompt with his intended
+        # translation
         inputbox.send_keys(Keys.ENTER)
-        self.wait_for_row_in_results_table('town')
+        self.wait_for_row_in_results_table('Did you mean?')
+        self.wait_for_row_in_results_table('pilsēta')
+
+        # When he clicks it, he gets the translation!
+        self.fail("Finish the test!")

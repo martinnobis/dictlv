@@ -45,3 +45,8 @@ class SearchViewTest(FixtureTest):
     def test_displays_searched_text_with_special_characters(self):
         response = self.client.get(reverse('view_search'), data={'text': 'labrīt'})
         self.assertContains(response, 'labrīt')
+
+    def test_wrong_special_characters_uses_did_you_mean_template(self):
+        response = self.client.get(reverse('view_search'), data={'text': 'pilseta'})
+        self.assertTemplateUsed(response, 'didyoumean.html')
+

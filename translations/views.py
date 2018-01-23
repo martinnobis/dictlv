@@ -8,6 +8,7 @@ def home_page(request):
     """
     return render(request, 'home.html', {'form': SearchForm()})
 
+# TODO: This view has a lot of if statements
 def search(request):
     """Handles the search form which attempts to retrieve translations from the
     database.
@@ -15,6 +16,7 @@ def search(request):
     if request.method == "GET":
         form = SearchForm(request.GET)
         if form.is_valid():
+            # TODO: also trim trailing whitespace, punctuation etc.
             user_in = form.data['text'].lower()
             lv_translations = get_translation(English, Latvian, user_in)
             en_translations = get_translation(Latvian, English, user_in)
@@ -27,4 +29,9 @@ def search(request):
                 return render(request, 'result.html',
                               {'search_term': user_in, 'translations': trans, 'form': SearchForm()})
             else:
+                # Remove special characters
+                # if string is different
+                    # search with modified string
+                    # if result found
+                        # return it
                 return render(request, 'noresult.html', {'search_term': user_in, 'form': SearchForm()})
