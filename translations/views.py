@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from translations.forms import SearchForm
 from translations.models import English, Latvian
-from translations.utils import get_translation
+from translations.utils import get_translations, special_chars, get_similar_latvian_words
 
 def home_page(request):
     """Returns the homepage
@@ -18,8 +18,11 @@ def search(request):
         if form.is_valid():
             # TODO: also trim trailing whitespace, punctuation etc.
             user_in = form.data['text'].lower()
-            lv_translations = get_translation(English, Latvian, user_in)
-            en_translations = get_translation(Latvian, English, user_in)
+
+            # Try exact translation
+            # If successful, return result.html
+            lv_translations = get_translations(English, Latvian, user_in)
+            en_translations = get_translations(Latvian, English, user_in)
             trans = []
             if lv_translations:
                 trans = trans + lv_translations
@@ -28,10 +31,14 @@ def search(request):
             if trans:
                 return render(request, 'result.html',
                               {'search_term': user_in, 'translations': trans, 'form': SearchForm()})
+
+            # Try translation w/o special characters
+            # If successful, return didyoumean.html
+            candidates = get_similar_latvian_words(user_in)
+            if candidates:
+                return render(request, 'didyoumean.html',
+                              {'search_term': user_in, 'candidates': candidates, 'form': SearchForm()})
+
+            # Else, return noresult.html
             else:
-                # Remove special characters
-                # if string is different
-                    # search with modified string
-                    # if result found
-                        # return it
                 return render(request, 'noresult.html', {'search_term': user_in, 'form': SearchForm()})

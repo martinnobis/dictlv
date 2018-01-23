@@ -38,7 +38,11 @@ def get_intersect_ids_from_id(model, id):
         return Latvian.objects.filter(enlv__en_id=id)
     return English.objects.filter(enlv__lv_id=id)
 
-def get_translation(from_lang, to_lang, text):
+@retrieve
+def get_alt_candidate(text):
+    return Latvian.objects.filter(alt=text)
+
+def get_translations(from_lang, to_lang, text):
     """Returns a list of translation strings.
     """
     from_object = get_object_from_text(from_lang, text)
@@ -48,3 +52,12 @@ def get_translation(from_lang, to_lang, text):
         to_objs = get_objects_from_ids(to_lang, to_ids)
         return [to_obj.txt for to_obj in to_objs]
     return []
+
+def get_similar_latvian_words(text):
+    """Searches the Latvian table for words which match the input text but which
+    may have incorrect special characters and returns a list of potential
+    candidates with proper spelling.
+    """
+    modified_text = text.translate(text.maketrans(special_chars))
+    candidates = Latvian.objects.filter(alt=modified_text)
+    return [candidate.txt for candidate in candidates]

@@ -4,7 +4,7 @@ from django.test import TestCase
 from translations.models import English, Latvian
 from translations.tests.fixture_test import FixtureTest
 from translations.utils import (get_translation, get_object_from_text, 
-                                special_chars)
+                                special_chars, get_similar_latvian_words)
 
 class RetrieveTest(FixtureTest):
     fixtures = ['translations.json']
@@ -55,3 +55,8 @@ class SpecialCharacterTest(TestCase):
         expected = "eeaaiiuuccggkkllnnsszz"
         modified_text = text.translate(text.maketrans(special_chars))
         self.assertEqual(expected, modified_text)
+    
+    def test_correct_candidate_is_returned(self):
+        text = "pilseta"
+        candidates = get_similar_latvian_words(text)
+        self.assertIn("pilsēta", candidates)

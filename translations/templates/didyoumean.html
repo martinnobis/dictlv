@@ -7,7 +7,9 @@
 <table id="id_results_table" class="table">
     <!-- It's important to put this in a td! -->
     <tr><td>Did you mean?</td></tr>
-    <tr><td>{{ candidate }}</td></tr>
+    {% for text in candidates %}
+    <tr><td>{{ text }}</td></tr>
+    {% endfor %}
 </table>
 
 {% endblock %}
