@@ -2,23 +2,11 @@ import string
 from django.apps import apps
 from django.test import TestCase
 from translations.models import English, Latvian
-from translations.tests.fixture_test import FixtureTest
-from translations.utils import (get_translation, get_object_from_text, 
+from translations.utils import (get_translations, get_object_from_text, 
                                 special_chars, get_similar_latvian_words)
 
-class RetrieveTest(FixtureTest):
+class RetrieveTest(TestCase):
     fixtures = ['translations.json']
-
-    def set_model_management(self, setting):
-        unmanaged_models = [m for m in apps.get_models() if not m._meta.managed]
-        for m in unmanaged_models:
-            m._meta.managed = setting 
-
-    def setUp(self):
-        self.set_model_management(True)
-
-    def tearDown(self):
-        self.set_model_management(False)
 
     def test_finds_english_object(self):
         self.assertIsNotNone(get_object_from_text(English, 'hello'))
@@ -27,11 +15,11 @@ class RetrieveTest(FixtureTest):
         self.assertIsNotNone(get_object_from_text(Latvian, 'sveiki'))
 
     def test_finds_one_to_one_translation(self):
-        translation = get_translation(English, Latvian, 'town')
+        translation = get_translations(English, Latvian, 'town')
         self.assertIn("pilsēta", translation)
 
     def test_finds_one_to_many_translations(self):
-        translations = get_translation(Latvian, English, 'sveiki')
+        translations = get_translations(Latvian, English, 'sveiki')
         self.assertIn("hello", translations)
         self.assertIn("hi", translations)
 
@@ -40,15 +28,16 @@ class RetrieveTest(FixtureTest):
         self.assertIsNone(get_object_from_text(English, 'helloooo'))
 
     def test_finds_no_translations(self):
-        self.assertFalse(get_translation(Latvian, English, 'suns'))
-        self.assertFalse(get_translation(Latvian, English, 'ar labu nakti'))
-        self.assertFalse(get_translation(English, Latvian, 'browser'))
+        self.assertFalse(get_translations(Latvian, English, 'suns'))
+        self.assertFalse(get_translations(Latvian, English, 'ar labu nakti'))
+        self.assertFalse(get_translations(English, Latvian, 'browser'))
 
     def test_translation_handles_punctuation(self):
-        translation = get_translation(Latvian, English, "Cik ir pulkstenis?")
+        translation = get_translations(Latvian, English, "Cik ir pulkstenis?")
         self.assertIn("What is the time?", translation)
 
 class SpecialCharacterTest(TestCase):
+    fixtures = ['translations.json']
 
     def test_all_special_characters_removed_from_text(self):
         text = "ēeāaīiūučcģgķkļlņnšsžz"

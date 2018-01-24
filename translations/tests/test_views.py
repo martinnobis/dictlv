@@ -3,7 +3,6 @@ from unittest.mock import patch
 from django.http import HttpRequest
 from django.urls import reverse 
 from django.test import TestCase
-from translations.tests.fixture_test import FixtureTest
 from translations.forms import SearchForm
 from translations.views import search
 
@@ -32,7 +31,8 @@ class SearchViewMockTest(unittest.TestCase):
         search(self.request)
         mockSearchForm.assert_called()
 
-class SearchViewTest(FixtureTest):
+class SearchViewTest(TestCase):
+    fixtures = ['translations.json']
 
     def test_uses_result_template(self):
         response = self.client.get(reverse('view_search'), data={'text': 'hi'})

@@ -50,13 +50,6 @@
 },
 {
   "model": "translations.latvian",
-  "pk": 3,
-  "fields": {
-    "txt": "suns"
-  }
-},
-{
-  "model": "translations.latvian",
   "pk": 4,
   "fields": {
     "txt": "ar labu nakti"
@@ -67,6 +60,13 @@
   "pk": 6,
   "fields": {
     "txt": "Cik ir pulkstenis?"
+  }
+},
+{
+  "model": "translations.latvian",
+  "pk": 7,
+  "fields": {
+    "txt": "meklēšana"
   }
 },
 {

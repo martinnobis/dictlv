@@ -59,5 +59,5 @@ def get_similar_latvian_words(text):
     candidates with proper spelling.
     """
     modified_text = text.translate(text.maketrans(special_chars))
-    candidates = Latvian.objects.filter(alt=modified_text)
-    return [candidate.txt for candidate in candidates]
+    candidate_objs = Latvian.objects.filter(alt=modified_text)
+    return [candidate.txt for candidate in candidate_objs]

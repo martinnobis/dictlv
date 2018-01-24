@@ -8,17 +8,10 @@ from .base import FunctionalTest
 class SimpleTranslationTest(FunctionalTest):
     fixtures = ['translations.json']
 
-    def set_model_management(self, setting):
-        unmanaged_models = [m for m in apps.get_models() if not m._meta.managed]
-        for m in unmanaged_models:
-            m._meta.managed = setting 
-
     def setUp(self):
-        self.set_model_management(True)
         self.browser = webdriver.Firefox()
 
     def tearDown(self):
-        self.set_model_management(False)
         self.browser.quit()
 
     def test_can_translate_a_word_in_english_and_latvian(self):
@@ -70,7 +63,7 @@ class SimpleTranslationTest(FunctionalTest):
 
         # He omits the special character in his search term
         inputbox = self.get_item_input_box()
-        inputbox.send_keys('pilseta') # pilsēta
+        inputbox.send_keys('pilseta')
 
         # When he hits enter he gets a 'Did you mean?' prompt with his intended
         # translation
@@ -79,4 +72,6 @@ class SimpleTranslationTest(FunctionalTest):
         self.wait_for_row_in_results_table('pilsēta')
 
         # When he clicks it, he gets the translation!
-        self.fail("Finish the test!")
+        self.wait_for_row_in_results_table('sveiki')
+
+        # Satisfied, he goes back to sleep
