@@ -72,6 +72,8 @@ class SimpleTranslationTest(FunctionalTest):
         self.wait_for_row_in_results_table('pilsēta')
 
         # When he clicks it, he gets the translation!
+        # TODO: How to provide a hyperlink?
+        self.fail("Finish the test!")
         self.wait_for_row_in_results_table('sveiki')
 
         # Satisfied, he goes back to sleep

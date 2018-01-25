@@ -45,7 +45,12 @@ class SpecialCharacterTest(TestCase):
         modified_text = text.translate(text.maketrans(special_chars))
         self.assertEqual(expected, modified_text)
     
-    def test_correct_candidate_is_returned(self):
+    def test_returns_correct_candidate_with_missing_special_chars(self):
         text = "pilseta"
         candidates = get_similar_latvian_words(text)
         self.assertIn("pilsēta", candidates)
+
+    def test_returns_correct_candidate_with_missing_some_special_chars(self):
+        text = "meklešana"
+        candidates = get_similar_latvian_words(text)
+        self.assertIn("meklēšana", candidates)

@@ -45,7 +45,8 @@
   "model": "translations.latvian",
   "pk": 2,
   "fields": {
-    "txt": "pilsēta"
+    "txt": "pilsēta",
+    "alt": "pilseta"
   }
 },
 {
@@ -66,7 +67,8 @@
   "model": "translations.latvian",
   "pk": 7,
   "fields": {
-    "txt": "meklēšana"
+    "txt": "meklēšana",
+    "alt": "meklesana"
   }
 },
 {
