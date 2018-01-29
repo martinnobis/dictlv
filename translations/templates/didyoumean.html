@@ -8,7 +8,7 @@
     <!-- It's important to put this in a td! -->
     <tr><td>Did you mean?</td></tr>
     {% for text in candidates %}
-    <tr><td>{{ text }}</td></tr>
+    <tr><td><a href="{% url 'show_translation' term=text %}">{{ text }}</a></td></tr>
     {% endfor %}
 </table>
 
