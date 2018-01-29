@@ -53,6 +53,13 @@ def get_translations(from_lang, to_lang, text):
         return [to_obj.txt for to_obj in to_objs]
     return []
 
+def translation_exists(lang, text):
+    obj = get_object_from_text(lang, text)
+    if obj:
+        if get_intersect_ids_from_id(lang, obj.id):
+            return True
+    return False
+
 def get_similar_latvian_words(text):
     """Searches the Latvian table for words which match the input text but which
     may have incorrect special characters and returns a list of potential

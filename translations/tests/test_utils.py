@@ -3,7 +3,8 @@ from django.apps import apps
 from django.test import TestCase
 from translations.models import English, Latvian
 from translations.utils import (get_translations, get_object_from_text, 
-                                special_chars, get_similar_latvian_words)
+                                special_chars, get_similar_latvian_words,
+                                translation_exists)
 
 class RetrieveTest(TestCase):
     fixtures = ['translations.json']
@@ -35,6 +36,12 @@ class RetrieveTest(TestCase):
     def test_translation_handles_punctuation(self):
         translation = get_translations(Latvian, English, "Cik ir pulkstenis?")
         self.assertIn("What is the time?", translation)
+
+    def test_translation_exists(self):
+        text = 'hi'
+        self.assertTrue(translation_exists(English, text))
+        text = 'asdwer'
+        self.assertFalse(translation_exists(English, text))
 
 class SpecialCharacterTest(TestCase):
     fixtures = ['translations.json']
