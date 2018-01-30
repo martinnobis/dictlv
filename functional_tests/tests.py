@@ -76,3 +76,16 @@ class SimpleTranslationTest(FunctionalTest):
         self.wait_for_row_in_results_table('town')
 
         # Satisfied, he goes back to sleep
+
+    def test_layout_and_styling(self):
+        # Karlis goes to the homepage
+        self.browser.get(self.live_server_url)
+        self.browser.set_window_size(1024, 768)
+
+        # He notices the input box is nicely centered
+        inputbox = self.get_item_input_box()
+        self.assertAlmostEqual(
+            inputbox.location['x'] + inputbox.size['width'] /2,
+            512,
+            delta=10
+        )
