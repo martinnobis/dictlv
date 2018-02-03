@@ -11,7 +11,6 @@ class SimpleTranslationTest(FunctionalTest):
         self.browser = webdriver.Firefox()
 
     def tearDown(self):
-        self.browser.close()
         self.browser.quit()
 
     def test_can_translate_a_word_in_english_and_latvian(self):
