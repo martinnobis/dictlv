@@ -1,6 +1,5 @@
 from selenium import webdriver
 from django.apps import apps
-from django.test import LiveServerTestCase
 from selenium.webdriver.common.keys import Keys
 
 from .base import FunctionalTest
@@ -12,6 +11,7 @@ class SimpleTranslationTest(FunctionalTest):
         self.browser = webdriver.Firefox()
 
     def tearDown(self):
+        self.browser.close()
         self.browser.quit()
 
     def test_can_translate_a_word_in_english_and_latvian(self):
@@ -85,7 +85,7 @@ class SimpleTranslationTest(FunctionalTest):
         # He notices the input box is nicely centered
         inputbox = self.get_item_input_box()
         self.assertAlmostEqual(
-            inputbox.location['x'] + inputbox.size['width'] /2,
+            inputbox.location['x'] + (inputbox.size['width'] / 2),
             512,
             delta=10
         )
