@@ -1,3 +1,5 @@
 -r base.txt # includes the base.txt requirements file
 
 selenium==3.8.1
+Sphinx==1.6.6
+sphinxcontrib-websupport==1.0.1
