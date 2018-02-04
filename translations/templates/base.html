@@ -1,37 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>EN ⇆ LV</title>
-        <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    </head>
-    
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="mx-auto">
-                    <div class="text-center">
-                        <h1>DictLV</h1>
-                        <!--- The input form -->
-                        <form method="GET" action="{% block form_action %}{% endblock %}">
-                            {{ form.text }}
-                        </form>
-                    </div>
-                </div>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>EN ⇆ LV</title>
+    <link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-            <div class="row">
-                <!--<div class="mx-auto"> -->
-                <div class="row justify-content-around">
-                    <!--- The results block -->
-                    {% block table %} {% endblock %}
-                </div>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <div class="text-center">
+                <h1>DictLV</h1>
+                <!--- The input form -->
+                <form method="GET" action="{% block form_action %}{% endblock %}">
+                    {{ form.text }}
+                </form>
             </div>
         </div>
+    </div>
 
-    </body>
+    <div class="row">
+        <div class="col">
+            <!--<div class="mx-auto"> -->
+            <!--- The results block -->
+            {% block table %} {% endblock %}
+        </div>
+    </div>
+
+</body>
 
 </html>
