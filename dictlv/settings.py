@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'translations',
         'USER': 'dictlv',
-        'PASSWORD': 'password',
+        'PASSWORD': os.environ['DICTLV_LOCAL_POSTGRES_KEY'],
         'HOST': 'localhost',
         'PORT': '',
     }
