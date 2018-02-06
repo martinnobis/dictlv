@@ -1,3 +1,3 @@
 -r base.txt # includes the base.txt requirements file
 
-selenium==3.8.1
+selenium==3.9
