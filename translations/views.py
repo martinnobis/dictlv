@@ -1,3 +1,5 @@
+"""Views for the translations app."""
+
 from itertools import repeat
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -8,14 +10,13 @@ from translations.utils import (get_translations, get_similar_latvian_words,
 
 
 def home_page(request):
-    """Returns the homepage
-    """
+    """Return the homepage."""
     return render(request, 'home.html', {'form': SearchForm()})
 
 
 # TODO: This view has a lot of if statements
 def show_translation(request, term):
-
+    """Get the translation and renders the result."""
     # Try exact translation
     # If successful, return result.html
     lv_translations = get_translations(English, Latvian, term)
@@ -39,12 +40,11 @@ def show_translation(request, term):
         if any(
                 map(translation_exists, repeat(Latvian),
                     [candidate for candidate in candidates])):
-            return render(
-                request, 'didyoumean.html', {
-                    'search_term': term,
-                    'candidates': candidates,
-                    'form': SearchForm()
-                })
+            return render(request, 'didyoumean.html', {
+                'search_term': term,
+                'candidates': candidates,
+                'form': SearchForm()
+            })
 
     # Else, return noresult.html
     return render(request, 'noresult.html', {
@@ -54,9 +54,7 @@ def show_translation(request, term):
 
 
 def search(request):
-    """Handles the search form which attempts to retrieve translations from the
-    database.
-    """
+    """Handle requests from the search form."""
     form = SearchForm(request.GET)
     print("in search")
     if form.is_valid():

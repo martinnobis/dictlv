@@ -1,9 +1,9 @@
 import os
 from selenium import webdriver
-from django.apps import apps
 from selenium.webdriver.common.keys import Keys
 
 from .base import FunctionalTest
+
 
 class SimpleTranslationTest(FunctionalTest):
     fixtures = ['translations.json']
@@ -28,12 +28,10 @@ class SimpleTranslationTest(FunctionalTest):
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('DictLV', header_text)
 
-        # He's invited to enter a word to translate. 
+        # He's invited to enter a word to translate.
         inputbox = self.get_item_input_box()
         self.assertEqual(
-            inputbox.get_attribute('placeholder'),
-            'Enter a word to translate'
-        )
+            inputbox.get_attribute('placeholder'), 'Enter a word to translate')
 
         # He decides to put a word in English, "hello".
         inputbox.send_keys('hello')
@@ -118,5 +116,4 @@ class SimpleTranslationTest(FunctionalTest):
         self.assertAlmostEqual(
             inputbox.location['x'] + (inputbox.size['width'] / 2),
             512,
-            delta=10
-        )
+            delta=10)

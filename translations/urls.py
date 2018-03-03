@@ -1,3 +1,5 @@
+"""URLS for the translation app."""
+
 from django.conf.urls import url
 from translations import views
 
