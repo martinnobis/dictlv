@@ -6,3 +6,4 @@ sphinxcontrib-websupport==1.0.1
 django-nose=1.4.5
 coverage=4.5.1
 yapf=0.20.2
+pyflakes=1.6.0
