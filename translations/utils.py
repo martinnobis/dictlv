@@ -1,5 +1,5 @@
-"""Utility functions for retrieving objects and translations from the database.
-"""
+"""Functions for retrieving objects and translations from the database."""
+
 from translations.models import English, Latvian
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -19,11 +19,10 @@ special_chars = {
 
 
 def retrieve(fn):
-    """Querying the database for non-existant object throws an exception. This
-    function can be used as a decorator to instead return None for when the
-    database is queried for objects which don't exist.
+    """Return None instead of an exception when an object doesn't exist.
+    
+    Otherwise an exception is thrown.
     """
-
     def modified_fn(*args, **kwargs):
         try:
             return fn(*args, **kwargs)
@@ -35,7 +34,7 @@ def retrieve(fn):
 
 @retrieve
 def get_object_from_text(model, text):
-    return model.objects.get(txt=text)
+    return model.objects.get(txt__iexact=text)
 
 
 @retrieve
@@ -47,9 +46,10 @@ def get_objects_from_ids(model, ids):
 # way to refactor all of these methods into a concise efficient query.
 @retrieve
 def get_intersect_ids_from_id(model, id):
-    """Searches for the id in the models intersect table and returns a list of
-    ids from the other column which correspond to its translations. Can only
-    work with English and Latvian models.
+    """Search for the id in the models intersect table.
+    
+    Returns a list of ids from the other column which correspond to its
+    translations. Can only work with English and Latvian models.
     """
     if model is English:
         return Latvian.objects.filter(enlv__en_id=id)
@@ -62,8 +62,7 @@ def get_alt_candidate(text):
 
 
 def get_translations(from_lang, to_lang, text):
-    """Returns a list of translation strings.
-    """
+    """Return a list of translation strings."""
     from_object = get_object_from_text(from_lang, text)
     if from_object:
         from_id = from_object.id
@@ -74,6 +73,10 @@ def get_translations(from_lang, to_lang, text):
 
 
 def translation_exists(lang, text):
+    """Check if a translation exists.
+
+    Retrns a boolean.
+    """
     obj = get_object_from_text(lang, text)
     if obj:
         if get_intersect_ids_from_id(lang, obj.id):
@@ -82,9 +85,9 @@ def translation_exists(lang, text):
 
 
 def get_similar_latvian_words(text):
-    """Searches the Latvian table for words which match the input text but which
-    may have incorrect special characters and returns a list of potential
-    candidates with proper spelling.
+    """Search the Latvian table for words with incorrect special characters.
+
+    Returns a list of potential candidates with proper spelling.
     """
     modified_text = text.translate(text.maketrans(special_chars))
     candidate_objs = Latvian.objects.filter(alt=modified_text)
