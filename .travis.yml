@@ -3,13 +3,16 @@ language: python
 python:
   - "3.6"
 
+services:
+  - postgresql
+
 install:
   - pip install -r requirements/ci.txt
 
 before_script:
-  - psql -c "CREATE ROLE dictlv"
-  - psql -c "ALTER ROLE dictlv CREATEDB"
-  - psql -c "CREATE DATABASE translations;"
+  - psql -c "CREATE ROLE dictlv" -U postgres
+  - psql -c "ALTER ROLE dictlv CREATEDB" -U postgres
+  - psql -c "CREATE DATABASE translations;" -U postgres
 
 script:
   - python manage.py test translations
