@@ -8,7 +8,6 @@ set -e
 python manage.py test --nologcapture
 
 # Check that source has correct formatting.
-#yapf --diff --recursive --style google translations/*.py functional_tests/*.py
 yapf -i --recursive --style google translations/*.py functional_tests/*.py
 
 # Run static analysis for Python bugs/cruft.
