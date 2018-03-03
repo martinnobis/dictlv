@@ -6,6 +6,9 @@ python:
 install:
   - pip install -r requirements/ci.txt
 
+before_script:
+  - psql -c "CREATE DATABASE translations;" -U dictlv
+
 script:
   - python manage.py test translations
   - python manage.py functional_tests
