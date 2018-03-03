@@ -12,8 +12,9 @@ install:
 before_script:
   - psql -c "CREATE ROLE dictlv" -U postgres
   - psql -c "ALTER ROLE dictlv CREATEDB" -U postgres
+  - psql -c "ALTER ROLE dictlv LOGIN" -U postgres
   - psql -c "CREATE DATABASE translations;" -U postgres
 
 script:
   - python manage.py test translations
-  - python manage.py functional_tests
+  - python manage.py test functional_tests
