@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+
+# Exit build script on first failure.
+set -e
+
+# Run unit tests and calculate code coverage.
+python manage.py test --nologcapture
+
+# Check that source has correct formatting.
+#yapf --diff --recursive --style google translations/*.py functional_tests/*.py
+yapf -i --recursive --style google translations/*.py functional_tests/*.py
+
+# Run static analysis for Python bugs/cruft.
+pyflakes translations/*.py functional_tests/*.py
+
+# Check docstrings for style consistency.
+pydocstyle  --add-ignore=D105,D106 \
+            translations/views.py \
+            translations/urls.py \
+            translations/utils.py \
+            translations/models.py \
+            translations/forms.py \
+            functional_tests/base.py \
+            functional_tests/test.py
