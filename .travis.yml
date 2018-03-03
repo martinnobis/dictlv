@@ -19,10 +19,15 @@ install:
   - pip install -r requirements/ci.txt
 
 before_script:
+  # postgresql
   - psql -c "CREATE ROLE dictlv" -U postgres
   - psql -c "ALTER ROLE dictlv CREATEDB" -U postgres
   - psql -c "ALTER ROLE dictlv LOGIN" -U postgres
   - psql -c "CREATE DATABASE translations;" -U postgres
+  # xvfb
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 
 script:
   - python manage.py test translations
