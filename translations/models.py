@@ -7,6 +7,7 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
+
 class English(models.Model):
     """Contains a list of English words.
     """
@@ -19,6 +20,7 @@ class English(models.Model):
 
     def __str__(self):
         return self.txt
+
 
 class Latvian(models.Model):
     """Contains a list of Latvian words. The alt column contains the spelling of
@@ -36,14 +38,17 @@ class Latvian(models.Model):
     def __str__(self):
         return self.txt
 
+
 class Enlv(models.Model):
     """Contains the ids for the translations between English and Latvian.
     Each row contains a foreignkey to a Latvian and English model id from their
     respective tables. Many-to-many and one-to-many translations are supported.
     """
     id = models.BigAutoField(primary_key=True)
-    en = models.ForeignKey(English, models.CASCADE, blank=False, null=False, default=1)
-    lv = models.ForeignKey(Latvian, models.CASCADE, blank=False, null=False, default=1)
+    en = models.ForeignKey(
+        English, models.CASCADE, blank=False, null=False, default=1)
+    lv = models.ForeignKey(
+        Latvian, models.CASCADE, blank=False, null=False, default=1)
 
     class Meta:
         managed = False

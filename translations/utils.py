@@ -1,32 +1,49 @@
 """Utility functions for retrieving objects and translations from the database.
 """
-from translations.models import English, Latvian, Enlv
+from translations.models import English, Latvian
 from django.core.exceptions import ObjectDoesNotExist
 
-special_chars = {'ē':'e','ā':'a','ī':'i','ū':'u','č':'c','ģ':'g','ķ':'k',
-                 'ļ':'l','ņ':'n','š':'s','ž':'z'}
+special_chars = {
+    'ē': 'e',
+    'ā': 'a',
+    'ī': 'i',
+    'ū': 'u',
+    'č': 'c',
+    'ģ': 'g',
+    'ķ': 'k',
+    'ļ': 'l',
+    'ņ': 'n',
+    'š': 's',
+    'ž': 'z'
+}
+
 
 def retrieve(fn):
     """Querying the database for non-existant object throws an exception. This
     function can be used as a decorator to instead return None for when the
     database is queried for objects which don't exist.
     """
+
     def modified_fn(*args, **kwargs):
         try:
             return fn(*args, **kwargs)
-        except(AssertionError, ObjectDoesNotExist) as e:
+        except (AssertionError, ObjectDoesNotExist) as e:
             return None
+
     return modified_fn
+
 
 @retrieve
 def get_object_from_text(model, text):
     return model.objects.get(txt=text)
 
+
 @retrieve
 def get_objects_from_ids(model, ids):
     return model.objects.filter(pk__in=ids)
 
-# TODO: How to refactor this to remove the if statement? There is probably a 
+
+# TODO: How to refactor this to remove the if statement? There is probably a
 # way to refactor all of these methods into a concise efficient query.
 @retrieve
 def get_intersect_ids_from_id(model, id):
@@ -38,9 +55,11 @@ def get_intersect_ids_from_id(model, id):
         return Latvian.objects.filter(enlv__en_id=id)
     return English.objects.filter(enlv__lv_id=id)
 
+
 @retrieve
 def get_alt_candidate(text):
     return Latvian.objects.filter(alt=text)
+
 
 def get_translations(from_lang, to_lang, text):
     """Returns a list of translation strings.
@@ -53,12 +72,14 @@ def get_translations(from_lang, to_lang, text):
         return [to_obj.txt for to_obj in to_objs]
     return []
 
+
 def translation_exists(lang, text):
     obj = get_object_from_text(lang, text)
     if obj:
         if get_intersect_ids_from_id(lang, obj.id):
             return True
     return False
+
 
 def get_similar_latvian_words(text):
     """Searches the Latvian table for words which match the input text but which
