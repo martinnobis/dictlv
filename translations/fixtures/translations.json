@@ -35,6 +35,13 @@
   }
 },
 {
+  "model": "translations.english",
+  "pk": 6,
+  "fields": {
+    "txt": "train station"
+  }
+},
+{
   "model": "translations.latvian",
   "pk": 1,
   "fields": {
@@ -71,6 +78,14 @@
     "alt": "meklesana"
   }
 },
+
+{
+  "model": "translations.latvian",
+  "pk": 8,
+  "fields": {
+    "txt": "vilcena stacija"
+  }
+},
 {
   "model": "translations.enlv",
   "pk": 1,
@@ -101,6 +116,14 @@
   "fields": {
     "en": 5,
     "lv": 6
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 5,
+  "fields": {
+    "en": 6,
+    "lv": 8
   }
 }
 ]

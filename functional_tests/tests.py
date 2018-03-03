@@ -80,6 +80,34 @@ class SimpleTranslationTest(FunctionalTest):
 
         # Satisfied, he goes back to sleep
 
+    def test_can_search_with_spaces(self):
+        # Karlis opens his favourite translator
+        self.browser.get(self.live_server_url)
+
+        # He searches for something which has a space
+        inputbox = self.get_item_input_box()
+        inputbox.send_keys('train station')
+        inputbox.send_keys(Keys.ENTER)
+
+        # When he clicks it, he gets the translation!
+        self.wait_for_row_in_results_table('vilcena stacija')
+
+        # Satisfied, he goes back to sleep
+
+    def test_can_search_with_punctuation(self):
+        # Karlis opens his favourite translator
+        self.browser.get(self.live_server_url)
+
+        # He searches for something which has a question mark
+        inputbox = self.get_item_input_box()
+        inputbox.send_keys('what is the time?')
+        inputbox.send_keys(Keys.ENTER)
+
+        # When he clicks it, he gets the translation!
+        self.wait_for_row_in_results_table('cik ir pulkstenis?')
+
+        # Satisfied, he goes back to sleep
+
     def test_layout_and_styling(self):
         # Karlis goes to the homepage
         self.browser.get(self.live_server_url)
