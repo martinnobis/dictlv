@@ -1,11 +1,11 @@
-   language: python
+language: python
 
-    python:
-      - "3.6"
+python:
+  - "3.6"
 
-    install:
-      - pip install -r requirements/ci.txt
+install:
+  - pip install -r requirements/ci.txt
 
-    script:
-      - python manage.py test translations
-      - python manage.py functional_tests
+script:
+  - python manage.py test translations
+  - python manage.py functional_tests
