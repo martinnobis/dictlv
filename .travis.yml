@@ -7,7 +7,9 @@ install:
   - pip install -r requirements/ci.txt
 
 before_script:
-  - psql -c "CREATE DATABASE translations;" -U dictlv
+  - psql -c "CREATE ROLE dictlv"
+  - psql -c "ALTER ROLE dictlv CREATEDB"
+  - psql -c "CREATE DATABASE translations;"
 
 script:
   - python manage.py test translations
