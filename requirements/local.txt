@@ -3,8 +3,8 @@
 selenium==3.8.1
 Sphinx==1.6.6
 sphinxcontrib-websupport==1.0.1
-django-nose=1.4.5
-coverage=4.5.1
-yapf=0.20.2
-pyflakes=1.6.0
-pydocstyle=2.1.1
+django-nose==1.4.5
+coverage==.5.1
+yapf==.20.2
+pyflakes==1.6.0
+pydocstyle==2.1.1

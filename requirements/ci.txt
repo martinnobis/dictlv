@@ -1,5 +1,5 @@
 -r base.txt # includes the base.txt requirements file
 
 selenium==3.4.1
-django-nose=1.4.5
-coverage=4.5.1
+django-nose==1.4.5
+coverage==4.5.1
