@@ -19,6 +19,7 @@ def show_translation(request, term):
     """Get the translation and renders the result."""
     # Try exact translation
     # If successful, return result.html
+    term = term.replace("_", " ")
     lv_translations = get_translations(English, Latvian, term)
     en_translations = get_translations(Latvian, English, term)
     trans = []
@@ -56,9 +57,8 @@ def show_translation(request, term):
 def search(request):
     """Handle requests from the search form."""
     form = SearchForm(request.GET)
-    print("in search")
     if form.is_valid():
         # TODO: also trim trailing whitespace, punctuation etc.
-        user_in = form.data['text'].lower()
-        print(user_in)
+        user_in = form.data['text']
+        user_in = user_in.lower().strip().replace(" ", "_")
         return redirect(reverse('show_translation', kwargs={'term': user_in}))

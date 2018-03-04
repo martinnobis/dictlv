@@ -45,6 +45,7 @@ TEST_RUNNER =  'django_nose.NoseTestSuiteRunner'
 
 NOSE_ARGS = [
     '--with-coverage',
+    '--nologcapture',
     '--cover-package=translations',
 ]
 
