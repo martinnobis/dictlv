@@ -21,4 +21,4 @@ pydocstyle  --add-ignore=D105,D106 \
             translations/models.py \
             translations/forms.py \
             functional_tests/base.py \
-            functional_tests/test.py
+            functional_tests/tests.py
