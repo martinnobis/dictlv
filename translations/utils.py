@@ -23,6 +23,7 @@ def retrieve(fn):
     
     Otherwise an exception is thrown.
     """
+
     def modified_fn(*args, **kwargs):
         try:
             return fn(*args, **kwargs)
@@ -34,7 +35,7 @@ def retrieve(fn):
 
 @retrieve
 def get_object_from_text(model, text):
-    return model.objects.get(txt__iexact=text)
+    return model.objects.get(txt__iregex=text)
 
 
 @retrieve

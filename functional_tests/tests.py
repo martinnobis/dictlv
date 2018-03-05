@@ -95,13 +95,21 @@ class SimpleTranslationTest(FunctionalTest):
 
         # Satisfied, he goes back to sleep
 
-    def test_can_search_with_punctuation(self):
+    def test_can_search_with_or_without_punctuation(self):
         # Karlis opens his favourite translator
         self.browser.get(self.live_server_url)
 
         # He searches for something which has a question mark
         inputbox = self.get_item_input_box()
         inputbox.send_keys('what is the time?')
+        inputbox.send_keys(Keys.ENTER)
+
+        # When he clicks it, he gets the translation!
+        self.wait_for_row_in_results_table('cik ir pulkstenis?')
+
+        inputbox = self.get_item_input_box()
+        inputbox.clear()
+        inputbox.send_keys('what is the time')
         inputbox.send_keys(Keys.ENTER)
 
         # When he clicks it, he gets the translation!
