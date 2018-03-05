@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/nobism/dictlv.svg?branch=master)](https://travis-ci.org/nobism/dictlv)
+
 # Dictlv
 An English ⇆ Latvian word translation website.
 
