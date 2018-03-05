@@ -45,6 +45,16 @@ class ShowTranslationTest(TestCase):
         response = self.client.get(reverse('show_translation', kwargs={'term': 'meklesana'}))
         self.assertTemplateUsed(response, 'noresult.html')
 
+    def test_cannot_search_correctly_with_term_which_has_spaces(self):
+        response = self.client.get(reverse('show_translation', kwargs={'term': 'train station'}))
+        self.assertNotContains(response, 'train station')
+
+    def test_will_not_form_url_with_spaces(self):
+        url = reverse('show_translation', kwargs={'term': 'train station'})
+        self.assertNotIn(url, 'train station')
+        self.assertNotIn(url, 'train%20station')
+
+
 
 class SearchViewTest(TestCase):
     fixtures = ['translations.json']
@@ -52,6 +62,11 @@ class SearchViewTest(TestCase):
     def test_redirects_to_show_translation_view(self):
         response = self.client.get(reverse('view_search'), data={'text': 'hi'})
         self.assertRedirects(response, reverse('show_translation', kwargs={'term': 'hi'}))
+
+    def test_replaces_spaces_with_underscores(self):
+        response = self.client.get(reverse('view_search'), data={'text': 'dog show'})
+        self.assertRedirects(response, reverse('show_translation', kwargs={'term': 'dog_show'}))
+
 
 @patch('translations.views.SearchForm')
 class SearchViewMockTest(unittest.TestCase):

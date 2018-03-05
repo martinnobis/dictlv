@@ -58,7 +58,6 @@ def search(request):
     """Handle requests from the search form."""
     form = SearchForm(request.GET)
     if form.is_valid():
-        # TODO: also trim trailing whitespace, punctuation etc.
         user_in = form.data['text']
         user_in = user_in.lower().strip().replace(" ", "_")
         return redirect(reverse('show_translation', kwargs={'term': user_in}))
