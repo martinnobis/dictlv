@@ -1,24 +1,26 @@
 -r base.txt # include the base.txt requirements file
 
-selenium==3.8.1
-Sphinx==1.6.6
-sphinxcontrib-websupport==1.0.1
-django-nose==1.4.5
-coverage==.5.1
-yapf==.20.2
-pyflakes==1.6.0
-pydocstyle==2.1.1
 alabaster==0.7.10
 Babel==2.5.1
 certifi==2017.11.5
 chardet==3.0.4
+coverage==4.5.1
+django-nose==1.4.5
 docutils==0.14
 idna==2.6
 imagesize==0.7.1
+Jinja2==2.10
 MarkupSafe==1.0
+nose==1.3.7
+pydocstyle==2.1.1
+pyflakes==1.6.0
 Pygments==2.2.0
 pytz==2017.3
 requests==2.18.4
+selenium==3.8.1
 six==1.11.0
 snowballstemmer==1.2.1
+Sphinx==1.6.6
+sphinxcontrib-websupport==1.0.1
 urllib3==1.22
+yapf==0.20.2
