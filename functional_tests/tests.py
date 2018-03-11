@@ -95,7 +95,7 @@ class SimpleTranslationTest(FunctionalTest):
 
         # Satisfied, he goes back to sleep
 
-    def test_can_search_with_or_without_punctuation(self):
+    def test_can_search_with_or_without_question_mark(self):
         # Karlis opens his favourite translator
         self.browser.get(self.live_server_url)
 

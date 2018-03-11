@@ -54,7 +54,13 @@ class ShowTranslationTest(TestCase):
         self.assertNotIn(url, 'train station')
         self.assertNotIn(url, 'train%20station')
 
+    def test_search_term_cannot_match_just_the_beginning_part_of_text(self):
+        response = self.client.get(reverse('show_translation', kwargs={'term': 'what_i'}))
+        self.assertTemplateUsed(response, 'noresult.html')
 
+    def test_search_term_cannot_match_just_the_end_part_of_text(self):
+        response = self.client.get(reverse('show_translation', kwargs={'term': 'ime'}))
+        self.assertTemplateUsed(response, 'noresult.html')
 
 class SearchViewTest(TestCase):
     fixtures = ['translations.json']

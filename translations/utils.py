@@ -35,7 +35,8 @@ def retrieve(fn):
 
 @retrieve
 def get_object_from_text(model, text):
-    return model.objects.get(txt__iregex=text)
+    regex = '^' + text + '[\?!\.]*$'
+    return model.objects.get(txt__iregex=regex)
 
 
 @retrieve
@@ -63,7 +64,10 @@ def get_alt_candidate(text):
 
 
 def get_translations(from_lang, to_lang, text):
-    """Return a list of translation strings."""
+    """Return a list of strings of the translation.
+    
+    List is empty if no translations exist.
+    """
     from_object = get_object_from_text(from_lang, text)
     if from_object:
         from_id = from_object.id

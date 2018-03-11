@@ -22,11 +22,7 @@ def show_translation(request, term):
     term = term.replace("_", " ")
     lv_translations = get_translations(English, Latvian, term)
     en_translations = get_translations(Latvian, English, term)
-    trans = []
-    if lv_translations:
-        trans = trans + lv_translations
-    if en_translations:
-        trans = trans + en_translations
+    trans = lv_translations + en_translations
     if trans:
         return render(request, 'result.html', {
             'search_term': term,
@@ -58,6 +54,10 @@ def search(request):
     """Handle requests from the search form."""
     form = SearchForm(request.GET)
     if form.is_valid():
-        user_in = form.data['text']
-        user_in = user_in.lower().strip().replace(" ", "_")
-        return redirect(reverse('show_translation', kwargs={'term': user_in}))
+        term = form.data['text']
+        term = term.lower().strip().replace(" ", "_")
+        return redirect(reverse('show_translation', kwargs={'term': term}))
+    return render(request, 'noresult.html', {
+        'search_term': term,
+        'form': SearchForm()
+    })
