@@ -30,5 +30,5 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-  - python manage.py test translations
-  - python manage.py test functional_tests
+  - python manage.py test translations --settings=dictlv.settings.local
+  - python manage.py test functional_tests --settings=dictlv.settings.local
