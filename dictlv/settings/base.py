@@ -15,21 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '-j%%h$g^u8^!y5ei3d!$&gz$fpvkq&ws6+*_lb4w2_4u7%ut$9'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,15 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'translations',
-    'django_nose',
-]
-
-TEST_RUNNER =  'django_nose.NoseTestSuiteRunner'
-
-NOSE_ARGS = [
-    '--with-coverage',
-    '--nologcapture',
-    '--cover-package=translations',
 ]
 
 MIDDLEWARE = [
@@ -79,20 +55,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dictlv.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'translations',
-        'USER': 'dictlv',
-        'PASSWORD': os.environ['DICTLV_LOCAL_POSTGRES_KEY'],
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
