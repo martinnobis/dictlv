@@ -5,7 +5,8 @@
 set -e
 
 # Run unit tests and calculate code coverage.
-python manage.py test --nologcapture
+#python manage.py test --nologcapture
+python manage.py test --nologcapture --settings=dictlv.settings.local
 
 # Check that source has correct formatting.
 yapf -i --recursive --style google translations/*.py functional_tests/*.py
