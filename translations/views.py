@@ -55,7 +55,7 @@ def search(request):
     form = SearchForm(request.GET)
     if form.is_valid():
         term = form.data['text']
-        term = term.lower().strip().replace(" ", "_")
+        term = term.strip().replace(" ", "_")
         return redirect(reverse('show_translation', kwargs={'term': term}))
     return render(request, 'noresult.html', {
         'search_term': term,
