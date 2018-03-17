@@ -10,5 +10,5 @@ class SearchForm(forms.Form):
         widget=forms.TextInput(
             attrs={'placeholder': 'Enter a word to translate'}))
 
-    class Meta:
-        fields = ('text',)
+    #class Meta:
+    #    fields = ('text',)

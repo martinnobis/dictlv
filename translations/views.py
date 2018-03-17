@@ -15,11 +15,19 @@ def home_page(request):
 
 
 # TODO: This view has a lot of if statements
-def show_translation(request, term):
-    """Get the translation and renders the result."""
+def search(request):
+    """Handle requests from the search form."""
     # Try exact translation
     # If successful, return result.html
-    term = term.replace("_", " ")
+    form = SearchForm(data=request.GET)
+    if form.is_valid():
+        term = form.data['text']
+        term = term.strip()
+    else:
+        # Handle invalid form 
+        pass
+        #return render(request, 'noresult.html', {'search_term': term, 'form': SearchForm()})
+
     lv_translations = get_translations(English, Latvian, term)
     en_translations = get_translations(Latvian, English, term)
     trans = lv_translations + en_translations
@@ -50,14 +58,7 @@ def show_translation(request, term):
     })
 
 
-def search(request):
-    """Handle requests from the search form."""
-    form = SearchForm(request.GET)
-    if form.is_valid():
-        term = form.data['text']
-        term = term.strip().replace(" ", "_")
-        return redirect(reverse('show_translation', kwargs={'term': term}))
-    return render(request, 'noresult.html', {
-        'search_term': term,
-        'form': SearchForm()
-    })
+def show_translation(request, language, term):
+    """Retrieve and show the exact translation."""
+    pass
+
