@@ -8,6 +8,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['localhost']
 
 INSTALLED_APPS += ['django_nose']
+INSTALLED_APPS += ['debug_toolbar']
+
+INTERNAL_IPS = ['127.0.0.1']
 
 TEST_RUNNER =  'django_nose.NoseTestSuiteRunner'
 
@@ -27,3 +30,5 @@ DATABASES = {
         'PORT': '',
     }
 }
+
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']

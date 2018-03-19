@@ -13,7 +13,12 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# The absolute path to the directory where collectstatic will collect static
+# files for deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -92,6 +97,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# URL to use when referring to static files located in STATIC_ROOT.
+# Example: "/static/" or "http://static.example.com/"
 STATIC_URL = '/static/'
 
 LOGGING = {
