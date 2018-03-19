@@ -5,3 +5,4 @@ __pycache__
 .DS_store
 docs/*
 .coverage
+dictlv/collected_static
