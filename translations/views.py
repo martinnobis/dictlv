@@ -22,7 +22,8 @@ def search(request):
     form = SearchForm(data=request.GET)
     if form.is_valid():
         term = form.data['text']
-        term = term.strip()
+        # TODO: This new strip has to be tested, it works really well!
+        term = term.strip('!?. ')
     else:
         # Handle invalid form 
         pass
