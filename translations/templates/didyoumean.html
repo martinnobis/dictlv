@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 
-{% block form_action %}{% url 'view_search' %}{% endblock %}
+{% block form_action %}{% url 'search' %}{% endblock %}
 
 {% block table %}
 
 <table id="id_results_table" class="table">
     <!-- It's important to put this in a td! -->
-    <tr><td>Did you mean?</td></tr>
+    <tr>
+        <td>Did you mean?</td>
+    </tr>
     {% for text in candidates %}
-    <tr><td><a href="{% url 'show_translation' term=text %}">{{ text }}</a></td></tr>
+    <tr>
+        <td>
+            <a href="{% url 'show_translation' term=text %}">{{ text }}</a>
+        </td>
+    </tr>
     {% endfor %}
 </table>
 

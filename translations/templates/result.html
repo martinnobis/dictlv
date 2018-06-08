@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
-{% block form_action %}{% url 'view_search' %}{% endblock %}
+{% block form_action %}{% url 'search' %}{% endblock %}
 
 {% block table %}
 
 <table id="id_results_table" class="table">
     <!-- It's important to put this in a td! -->
-    <tr><td>{{ search_term }}</td></tr>
+    <tr>
+        <td>{{ search_term }}</td>
+    </tr>
     {% for text in translations %}
-    <tr><td>{{ text }}</td></tr>
+    <tr>
+        <td>{{ text }}</td>
+    </tr>
     {% endfor %}
 </table>
 

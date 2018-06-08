@@ -25,7 +25,7 @@ def search(request):
         # TODO: This new strip has to be tested, it works really well!
         term = term.strip('!?. ')
     else:
-        # Handle invalid form 
+        # Handle invalid form
         pass
         #return render(request, 'noresult.html', {'search_term': term, 'form': SearchForm()})
 
@@ -46,11 +46,12 @@ def search(request):
         if any(
                 map(translation_exists, repeat(Latvian),
                     [candidate for candidate in candidates])):
-            return render(request, 'didyoumean.html', {
-                'search_term': term,
-                'candidates': candidates,
-                'form': SearchForm()
-            })
+            return render(
+                request, 'didyoumean.html', {
+                    'search_term': term,
+                    'candidates': candidates,
+                    'form': SearchForm()
+                })
 
     # Else, return noresult.html
     return render(request, 'noresult.html', {
@@ -59,7 +60,14 @@ def search(request):
     })
 
 
-def show_translation(request, language, term):
+def show_translation(request, term):
     """Retrieve and show the exact translation."""
-    pass
-
+    lv_translations = get_translations(English, Latvian, term)
+    en_translations = get_translations(Latvian, English, term)
+    trans = lv_translations + en_translations
+    if trans:
+        return render(request, 'result.html', {
+            'search_term': term,
+            'translations': trans,
+            'form': SearchForm()
+        })

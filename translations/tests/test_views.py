@@ -3,13 +3,13 @@ from unittest.mock import patch
 from unittest import skip
 from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpRequest
-from django.urls import reverse 
+from django.urls import reverse
 from django.test import TestCase
 from translations.forms import SearchForm
 from translations.views import show_translation, search
 
-class HomePageTest(TestCase):
 
+class HomePageTest(TestCase):
     def test_uses_home_template(self):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
@@ -18,11 +18,12 @@ class HomePageTest(TestCase):
         response = self.client.get('/')
         self.assertIsInstance(response.context['form'], SearchForm)
 
+
 class SearchViewTest(TestCase):
     fixtures = ['translations.json']
 
     def test_uses_result_template(self):
-        response = self.client.get(reverse('view_search'), data={'text': 'hi'})
+        response = self.client.get(reverse('search'), data={'text': 'hi'})
         self.assertTemplateUsed(response, 'result.html')
 
     def test_final_url_has_search_term_in_it(self):
@@ -30,9 +31,9 @@ class SearchViewTest(TestCase):
         # TODO: Test redirection here
         #form = SearchForm()
         #form.text = 'table'
-        #response = self.client.get(reverse('view_search'), data={'form': form})
+        #response = self.client.get(reverse('search'), data={'form': form})
         #print(response)
-        #url = reverse('view_search', kwargs={'term': 'table'})
+        #url = reverse('search', kwargs={'term': 'table'})
         #self.assertIn('table', url)
 
     def test_displays_searched_text(self):
@@ -48,11 +49,12 @@ class SearchViewTest(TestCase):
         self.assertContains(response, 'labrīt')
 
     def test_wrong_special_characters_uses_did_you_mean_template(self):
-        response = self.client.get(reverse('view_search'), data={'text': 'pilseta'})
+        response = self.client.get(reverse('search'), data={'text': 'pilseta'})
         self.assertTemplateUsed(response, 'didyoumean.html')
 
     def test_special_char_term_without_translation_returns_no_result(self):
-        response = self.client.get(reverse('view_search'), data={'text': 'meklesana'})
+        response = self.client.get(
+            reverse('search'), data={'text': 'meklesana'})
         self.assertTemplateUsed(response, 'noresult.html')
 
     def test_cannot_search_correctly_with_term_which_has_spaces(self):
@@ -63,15 +65,15 @@ class SearchViewTest(TestCase):
         #self.assertNotContains(response, 'train station')
 
     def test_search_term_cannot_match_just_the_beginning_part_of_text(self):
-        response = self.client.get(reverse('view_search'), data={'text': 'what i'})
+        response = self.client.get(reverse('search'), data={'text': 'what i'})
         self.assertTemplateUsed(response, 'noresult.html')
 
     def test_search_term_cannot_match_just_the_end_part_of_text(self):
-        response = self.client.get(reverse('view_search'), data={'text': 'ime'})
+        response = self.client.get(reverse('search'), data={'text': 'ime'})
         self.assertTemplateUsed(response, 'noresult.html')
 
 
-@patch('translations.views.SearchForm')
+@patch('translations.searchs.SearchForm')
 class SearchViewMockTest(unittest.TestCase):
     fixtures = ['translations.json']
 

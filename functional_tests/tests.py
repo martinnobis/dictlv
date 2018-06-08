@@ -91,7 +91,7 @@ class SimpleTranslationTest(FunctionalTest):
         self.wait_for_row_in_results_table('vilciena stacija')
 
         # He also sees that the url can be easily reproduced himself
-        self.assertIn("train_station", self.browser.current_url)
+        self.assertIn("train+station", self.browser.current_url)
 
         # Satisfied, he goes back to sleep
 
