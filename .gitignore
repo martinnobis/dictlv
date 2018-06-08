@@ -6,3 +6,4 @@ __pycache__
 docs/*
 .coverage
 dictlv/collected_static
+.vscode/*

@@ -22,9 +22,7 @@ class SearchViewTest(TestCase):
     fixtures = ['translations.json']
 
     def test_uses_result_template(self):
-        form = SearchForm()
-        form.text = 'hi'
-        response = self.client.get(reverse('view_search'), data={'form': form})
+        response = self.client.get(reverse('view_search'), data={'text': 'hi'})
         self.assertTemplateUsed(response, 'result.html')
 
     def test_final_url_has_search_term_in_it(self):
@@ -54,9 +52,7 @@ class SearchViewTest(TestCase):
         self.assertTemplateUsed(response, 'didyoumean.html')
 
     def test_special_char_term_without_translation_returns_no_result(self):
-        form = SearchForm()
-        form.text = 'meklesana'
-        response = self.client.get(reverse('view_search'), data={'form': form})
+        response = self.client.get(reverse('view_search'), data={'text': 'meklesana'})
         self.assertTemplateUsed(response, 'noresult.html')
 
     def test_cannot_search_correctly_with_term_which_has_spaces(self):

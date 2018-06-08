@@ -9,10 +9,10 @@ An English ⇆ Latvian word translation website.
 * [Selenium](http://www.seleniumhq.org/) - Web browser testing
 * [Sphinx](http://www.sphinx-doc.org/en/stable/) - Documentation generator
 
-## Build Instructions
-
+## Build Instructions 
 * Documentation - Run `make html` in the `/docs`
  folder.
+* Tests - Run `
 
 ## License
 
