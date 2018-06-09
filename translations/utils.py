@@ -36,7 +36,7 @@ def retrieve(fn):
 @retrieve
 def get_object_from_text(model, text):
     regex = '^' + text + '[\?!\.]*$'
-    return model.objects.get(txt__iregex=regex)
+    return model.objects.filter(txt__iregex=regex)
 
 
 @retrieve
@@ -69,12 +69,13 @@ def get_translations(from_lang, to_lang, text):
     List is empty if no translations exist.
     """
     from_object = get_object_from_text(from_lang, text)
-    if from_object:
-        from_id = from_object.id
+    translations = []
+    for x in list(from_object):
+        from_id = x.id
         to_ids = get_intersect_ids_from_id(from_lang, from_id)
         to_objs = get_objects_from_ids(to_lang, to_ids)
-        return [to_obj.txt for to_obj in to_objs]
-    return []
+        translations += [to_obj.txt for to_obj in to_objs]
+    return translations
 
 
 def translation_exists(lang, text):
@@ -83,8 +84,8 @@ def translation_exists(lang, text):
     Retrns a boolean.
     """
     obj = get_object_from_text(lang, text)
-    if obj:
-        if get_intersect_ids_from_id(lang, obj.id):
+    for x in list(obj):
+        if get_intersect_ids_from_id(lang, x.id):
             return True
     return False
 

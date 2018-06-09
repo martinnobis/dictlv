@@ -42,6 +42,13 @@
   }
 },
 {
+  "model": "translations.english",
+  "pk": 7,
+  "fields": {
+    "txt": "hi!"
+  }
+},
+{
   "model": "translations.latvian",
   "pk": 1,
   "fields": {
@@ -78,12 +85,18 @@
     "alt": "meklesana"
   }
 },
-
 {
   "model": "translations.latvian",
   "pk": 8,
   "fields": {
     "txt": "vilciena stacija"
+  }
+},
+{
+  "model": "translations.latvian",
+  "pk": 9,
+  "fields": {
+    "txt": "sveiks!"
   }
 },
 {
@@ -124,6 +137,14 @@
   "fields": {
     "en": 6,
     "lv": 8
+  }
+},
+{
+  "model": "translations.enlv",
+  "pk": 6,
+  "fields": {
+    "en": 7,
+    "lv": 9
   }
 }
 ]

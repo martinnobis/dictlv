@@ -25,8 +25,8 @@ class RetrieveTest(TestCase):
         self.assertIn("hi", translations)
 
     def test_cannot_find_search_term(self):
-        self.assertIsNone(get_object_from_text(Latvian, 'sveaikiu'))
-        self.assertIsNone(get_object_from_text(English, 'helloooo'))
+        self.assertFalse(get_object_from_text(Latvian, 'sveaikiu'))
+        self.assertFalse(get_object_from_text(English, 'helloooo'))
 
     def test_finds_no_translations(self):
         self.assertFalse(get_translations(Latvian, English, 'suns'))
